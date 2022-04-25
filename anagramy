@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+
+bool czy_anagram(char* a, char* b)
+{
+    int rozj = strlen(a), rozd = strlen(b);
+    if (rozj != rozd)
+        cout << "Podane wyrazy maja inne dlugosci i ";
+
+    int licz[127] = {}; //zerujemy licznniki
+    for (int i = 0; i < rozj; i++)
+        licz[a[i]]++; //zliczamy litery pierwszego wyrazu
+    for (int i = 0; i < rozj; i++)
+        licz[b[i]]--; //odejmowanie wystapien liter
+
+    for (int i = 0; i < 127; i++)
+        if (licz[i] != 0) //jesli ktorys licznik sie nie wyzerowal
+            return false; //to oznacza, ze słowa nie sa anagramami
+
+    return true; //jesli wszystkie liczniki sie wyzerowały, to mamy anagramy
+}
+
+int main()
+{
+
+    char a[101], b[101]; //dwa słowa, maksymalnie 100 znaków
+    cout << "Podaj dwa wyrazy: ";
+    cin >> a >> b;
+
+    if (czy_anagram(a, b))
+        cout << "Podane wyrazy to anagramy\n";
+    else
+        cout << "Podane wyrazy to nie anagramy\n";
+
+
+    return 0;
+}
